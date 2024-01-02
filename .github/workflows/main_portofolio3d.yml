@@ -60,3 +60,4 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_10CBBB6C12744BA493977CA15B10DE07 }}
+          endpoint_url: meligaportofolio.azurewebsites.net
