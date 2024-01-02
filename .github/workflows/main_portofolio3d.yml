@@ -30,6 +30,24 @@ jobs:
     needs: build
 
     steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: node-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+      
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'Portofolio3D'
+          slot-name: 'Production'
+          package: .
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_10CBBB6C12744BA493977CA15B10DE07 }}
+          endpoint_url: meligaportofolio.azurewebsites.net
+
     - name: Deploy to Azure
       uses: Azure/static-web-apps-deploy@v1
       with:
